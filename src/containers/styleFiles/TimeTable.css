@@ -1,0 +1,4 @@
+.time-tables{
+    display: flex;
+    flex-direction: column;
+}
