@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import autoBind from 'react-autobind';
+
 import {connect} from 'react-redux';
 import * as Selectors from '../store/MoviesInfo/reducer';
 import * as Actions from "../store/MoviesInfo/actions";
@@ -21,10 +21,9 @@ class ChoseTimes extends Component {
     render() {
         let times = this.props.times.map((time) => {
             if (time.movieName === this.state.movieName) {
-                return <Link to={'reservation/'+this.state.id}>
+                return <Link to={'reservation/' + this.state.id + '/' + time.time} key={time.time}>
                     <button className='btn-time'
-                            key={time.time}
-                            onClick={() => this.props.dispatch(Actions.changeTimeChose())}
+                            onClick={() => this.props.dispatch(Actions.changeTimeChose(time.time))}
                     >{time.time}</button>
                 </Link>
             } else {

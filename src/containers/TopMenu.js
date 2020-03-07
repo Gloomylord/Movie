@@ -16,15 +16,22 @@ class TopMenu extends Component {
         return (
             <div className="top-menu">
                 <div className='top-menu-pos center'>
-                    <NavLink className='nav' to="/">
-                        <div className='center pointer top-button'>Главная</div>
-                    </NavLink>
-                    <NavLink className='nav' to="/timetable">
-                        <div className='center pointer top-button'>Расписание</div>
-                    </NavLink>
-                    <div className='center pointer top-button about-as'>О сервисе</div>
+                    <div className='position-div'>
+                        <NavLink className='nav' to="/">
+                            <div className='center pointer top-button'>Главная</div>
+                        </NavLink>
+                        <NavLink className='nav' to="/timetable">
+                            <div className='center pointer top-button'>Расписание</div>
+                        </NavLink>
+                        <NavLink className='nav' to="/log_in_editing">
+                            <div className='center pointer top-button'>Редактировать</div>
+                        </NavLink>
+                    </div>
+                    <Search/>
                 </div>
-                <Search/>
+                <NavLink className='nav about-us' to="/about_us">
+                    <div className='center pointer top-button '>О сервисе</div>
+                </NavLink>
             </div>
         );
     }

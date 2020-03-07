@@ -6,8 +6,8 @@ export function changeSome() {
     return ({type: types.SOME});
 }
 
-export function changeTimeChose() {
-    return ({type: types.TOGGLE_ISCHOSETIME});
+export function changeTimeChose(time) {
+    return ({type: types.TOGGLE_ISCHOSETIME,time});
 }
 
 export function changeMovie(id) {

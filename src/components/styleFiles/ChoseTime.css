@@ -9,11 +9,6 @@
     padding-left: 13px !important;
     padding-right: 13px !important;
 }
-.time-div {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
 .btn-time:hover{
     border: #aaaaaa solid 2px;
     background-color: #4f4c4e;
@@ -22,4 +17,9 @@
 .btn-time:active{
     border: #4f4c4e solid 2px;
     color: #707068;
+}
+.time-div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }

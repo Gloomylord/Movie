@@ -1,5 +1,4 @@
 import React, {Component, Fragment} from 'react';
-import autoBind from 'react-autobind';
 import {connect} from 'react-redux';
 import * as Selectors from '../store/MoviesInfo/reducer';
 import * as Actions from "../store/MoviesInfo/actions";
@@ -24,8 +23,7 @@ class MovieInfo extends Component {
 
     }
     componentWillReceiveProps(nextProps, nextContext) {
-        console.log('this:',this.props);
-        if(nextProps.movieInfo !== this.props.movieInfo){
+        if(nextProps.movieInfo !== this.props.movieInfo || nextProps.movieInfo !== this.state.movieInfo ){
             this.setState({
                 movieInfo: nextProps.movieInfo
             })
@@ -33,7 +31,6 @@ class MovieInfo extends Component {
     }
 
     render() {
-        console.log("show it pleas", this.state.movieInfo);
         return (
             <Fragment>
                 {(this.state.movieInfo) ?
@@ -64,7 +61,7 @@ function mapStateToProps(state) {
         isChoseTime: Selectors.checkChoseTime(state),
         movieInfo: Selectors.getMovieInfo(state),
         routing: routerReducer,
-        showMsg: state.movieInfo.showMsg
+        showMsg: state.movieInfo.showMsg,
     };
 }
 
