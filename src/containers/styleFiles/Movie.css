@@ -1,18 +1,22 @@
-.movie-img-style{
+.movie-img-style {
     margin: 20px;
+    padding: 5px;
 }
-.img-style{
+
+.img-style {
     margin: 1px;
     max-width: 400px;
     max-height: 300px;
     min-width: 200px;
     min-height: 200px;
 }
-.img-style:hover{
+
+.img-style:hover {
     margin: 0;
     border: #aaaaaa solid 1px;
 }
-.img-style:active{
+
+.img-style:active {
     margin: 0;
     border: #4f4c4e solid 1px;
 }

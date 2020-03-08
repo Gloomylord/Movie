@@ -9,17 +9,34 @@
     padding-left: 13px !important;
     padding-right: 13px !important;
 }
-.btn-time:hover{
+
+.btn-time:hover {
     border: #aaaaaa solid 2px;
     background-color: #4f4c4e;
     color: white;
 }
-.btn-time:active{
+
+.btn-time:active {
     border: #4f4c4e solid 2px;
     color: #707068;
 }
+
 .time-div {
     display: flex;
     flex-direction: row;
+    justify-content: center;
     flex-wrap: wrap;
+}
+
+.time-add{
+    align-self: center;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    font-size: 15px;
+}
+
+.btn-time-add{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

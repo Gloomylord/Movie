@@ -1,13 +1,10 @@
 import React, {Component} from 'react';
-import autoBind from 'react-autobind';
 import {connect} from 'react-redux';
 import * as Selectors from '../store/MoviesInfo/reducer';
 import * as Actions from "../store/MoviesInfo/actions";
 import Search from "../components/Search";
 
 import './styleFiles/TopMenu.css';
-import '../iconmonstr-iconic-font-1.3.0/css/iconmonstr-iconic-font.css';
-import '../iconmonstr-iconic-font-1.3.0/css/iconmonstr-iconic-font.min.css';
 import {NavLink} from "react-router-dom";
 
 class TopMenu extends Component {
@@ -23,9 +20,9 @@ class TopMenu extends Component {
                         <NavLink className='nav' to="/timetable">
                             <div className='center pointer top-button'>Расписание</div>
                         </NavLink>
-                        <NavLink className='nav' to="/log_in_editing">
-                            <div className='center pointer top-button'>Редактировать</div>
-                        </NavLink>
+                        <div className='center pointer top-button'
+                             onClick={()=>this.props.dispatch(Actions.changeAdmin())}
+                        >Редактировать</div>
                     </div>
                     <Search/>
                 </div>
@@ -41,7 +38,8 @@ function mapStateToProps(state) {
     const some = Selectors.getSome(state);
     return {
         some,
-        showMsg: state.movieInfo.showMsg
+        isAdmin: Selectors.checkIsAdmin(state),
+        showMsg: state.movieInfo.showMsg,
     };
 }
 

@@ -5,9 +5,8 @@ import {
 } from "react-router-dom";
 import {routerReducer} from 'react-router-redux';
 
-import '../iconmonstr-iconic-font-1.3.0/css/iconmonstr-iconic-font.css';
-import '../iconmonstr-iconic-font-1.3.0/css/iconmonstr-iconic-font.min.css';
 import './styleFiles/AboutUS.css'
+import * as Selectors from "../store/MoviesInfo/reducer";
 
 class AboutUs extends Component {
 
@@ -21,11 +20,9 @@ class AboutUs extends Component {
                     Спасибо, что интересуетесь нами, мы очень старались.
                     <br/>Вот котик для настроения, вы супер.
                 </div>
-
                 <div className='img-border'>
                     <img className='about-us-img' src='/img/cat.jpg'/>
                 </div>
-
             </div>
         );
     }
@@ -34,6 +31,7 @@ class AboutUs extends Component {
 function mapStateToProps(state) {
     return {
         routing: routerReducer,
+        isAdmin: Selectors.checkIsAdmin(state),
     };
 }
 

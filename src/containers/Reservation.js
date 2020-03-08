@@ -6,9 +6,6 @@ import {
     withRouter,
 } from "react-router-dom";
 import {routerReducer} from 'react-router-redux';
-
-import '../iconmonstr-iconic-font-1.3.0/css/iconmonstr-iconic-font.css';
-import '../iconmonstr-iconic-font-1.3.0/css/iconmonstr-iconic-font.min.css';
 import './styleFiles/Reservation.css';
 
 class Reservation extends Component {
@@ -66,6 +63,7 @@ function mapStateToProps(state) {
         movieInfo: Selectors.getMovieInfo(state),
         routing: routerReducer,
         showMsg: state.movieInfo.showMsg,
+        isAdmin: Selectors.checkIsAdmin(state),
         places: Selectors.getPlaces(state),
     };
 }

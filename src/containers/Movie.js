@@ -1,11 +1,6 @@
 import React, {Component} from 'react';
-import autoBind from 'react-autobind';
 import {connect} from 'react-redux';
 import * as Selectors from '../store/MoviesInfo/reducer';
-import * as Actions from "../store/MoviesInfo/actions";
-
-import '../iconmonstr-iconic-font-1.3.0/css/iconmonstr-iconic-font.css';
-import '../iconmonstr-iconic-font-1.3.0/css/iconmonstr-iconic-font.min.css';
 import './styleFiles/Movie.css'
 import {Link} from "react-router-dom";
 
@@ -32,6 +27,7 @@ function mapStateToProps(state) {
     const movies = Selectors.getMovies(state);
     return {
         movies,
+        isAdmin: Selectors.checkIsAdmin(state),
         showMsg: state.movieInfo.showMsg
     };
 }

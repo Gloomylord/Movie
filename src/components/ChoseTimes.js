@@ -1,15 +1,12 @@
 import React, {Component} from 'react';
-
 import {connect} from 'react-redux';
 import * as Selectors from '../store/MoviesInfo/reducer';
 import * as Actions from "../store/MoviesInfo/actions";
-
 import './styleFiles/ChoseTime.css'
-import './styleFiles/MovieInfo.css'
-
+import '../iconmonstr-iconic-font-1.3.0/css/iconmonstr-iconic-font.css'
+import '../iconmonstr-iconic-font-1.3.0/css/iconmonstr-iconic-font.min.css'
 import {
     Link,
-    withRouter,
 } from "react-router-dom";
 
 class ChoseTimes extends Component {
@@ -30,7 +27,14 @@ class ChoseTimes extends Component {
                 return ''
             }
         });
-        return (<div className='time-div'>{times}</div>);
+        return (<div className='time-div'>
+            {times}
+            { this.props.isAdmin ?
+            <button className='btn-time btn-time-add'>
+                <i className="im im-plus text-color-main time-add"/>
+            </button> :''
+            }
+        </div>);
     }
 }
 
@@ -38,6 +42,7 @@ function mapStateToProps(state) {
     return {
         times: Selectors.getTimes(state),
         movies: Selectors.getMovies(state),
+        isAdmin: Selectors.checkIsAdmin(state),
         showMsg: state.movieInfo.showMsg
     };
 }

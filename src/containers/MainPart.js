@@ -13,11 +13,7 @@ import TimeTable from "./TimeTable";
 import AboutUs from "../components/AboutUs";
 import Reservation from "./Reservation";
 
-import '../iconmonstr-iconic-font-1.3.0/css/iconmonstr-iconic-font.css';
-import '../iconmonstr-iconic-font-1.3.0/css/iconmonstr-iconic-font.min.css';
 import './styleFiles/MainPart.css'
-
-
 
 
 class MainPart extends Component {
@@ -33,7 +29,7 @@ class MainPart extends Component {
                         <GetMovie/>
                     </Route>
                     <Route path={`/movie/:topicId`} exact>
-                        <MovieInfo>rgc45</MovieInfo>
+                        <MovieInfo/>
                     </Route>
                     <Route path={`/movie/reservation/:topicId`}>
                         <Reservation/>
@@ -44,8 +40,8 @@ class MainPart extends Component {
                     <Route path={`/about_us`} exact>
                         <AboutUs/>
                     </Route>
-                    <Route path={`/about_us`} exact>
-
+                    <Route path={`/log_in_editing`} exact>
+                        <div className='text-color-main'>Пока пусто</div>
                     </Route>
                 </Switch>
             </div>
@@ -58,8 +54,9 @@ function mapStateToProps(state) {
     return {
         some,
         routing: routerReducer,
+        isAdmin: Selectors.checkIsAdmin(state),
         movieInfo: Selectors.getMovieInfo(state),
-        showMsg: state.movieInfo.showMsg
+        showMsg: state.movieInfo.showMsg,
     };
 }
 

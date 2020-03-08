@@ -1,20 +1,24 @@
-.time-tables{
+.time-tables {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     max-width: 95%;
 }
-.btn-time-table{
+
+.btn-time-table {
     display: flex;
     flex-direction: row;
+    justify-content: center;
     flex-wrap: wrap;
     max-width: 200px;
 }
-.img-style-time-table{
+
+.img-style-time-table {
     max-width: 200px;
     max-height: 200px;
 }
-.one-movie-time-tables{
+
+.one-movie-time-tables {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -23,9 +27,11 @@
     border: #707068 solid 1px;
     padding: 20px;
 }
-.margin-auto{
+
+.margin-auto {
     margin: auto;
 }
-.tile-list{
+
+.tile-list {
     max-width: 200px;
 }

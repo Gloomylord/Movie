@@ -3,4 +3,8 @@ export const SOME = 'MoviesInfo.SOME';
 
 export const TOGGLE_MSG = 'TOGGLE_MSG';
 export const SOME_MOVIE = 'SOME_MOVIE';
-export const TOGGLE_ISCHOSETIME = 'TOGGLE_ISCHOSETIME';
+export const TOGGLE_IS_CHOSE_TIME = 'TOGGLE_ISC_HOSE_TIME';
+export const CHANGE_IS_ADMIN = 'CHANGE_IS_ADMIN';
+export const ADD_TIME = 'ADD_TIME';
+export const EDITING_DESCRIPTION = 'EDITING_DESCRIPTION';
+export const DESCRIPTION = 'DESCRIPTION';

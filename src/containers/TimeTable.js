@@ -1,11 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as Selectors from '../store/MoviesInfo/reducer';
-
-import '../iconmonstr-iconic-font-1.3.0/css/iconmonstr-iconic-font.css';
-import '../iconmonstr-iconic-font-1.3.0/css/iconmonstr-iconic-font.min.css';
 import './styleFiles/TimeTable.css'
-
 import {
     NavLink,
     withRouter,
@@ -50,7 +46,7 @@ class TimeTable extends Component {
             </div>
             <div className='btn-time-table'>
                 {value.times.map((time) => <NavLink to={'/movie/reservation/' + value.id + '/' + time} key={time}>
-                    <button className='btn-time'
+                    <button className='btn-time '
                             key={time + '1'}
                     >{time}</button>
                 </NavLink>)}
@@ -71,6 +67,7 @@ function mapStateToProps(state) {
         movieInfo: Selectors.getMovieInfo(state),
         routing: routerReducer,
         showMsg: state.movieInfo.showMsg,
+        isAdmin: Selectors.checkIsAdmin(state),
         movies: Selectors.getMovies(state),
     };
 }

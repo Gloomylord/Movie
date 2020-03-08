@@ -6,22 +6,26 @@ import places from "./Places";
 
 const initialState = Immutable({
     some: false,
-    topicsByUrl: undefined,
-    selectedTopicUrls: [],
-    selectionFinalized: false,
     showMsg: true,
     someMovie: null,
     movies: some,
     times: times,
     isChoseTime: false,
     places: places,
+    isAdmin: false,
+    editingDescription: false,
+
 });
 
 export default function reduce(state = initialState, action = {}) {
     switch (action.type) {
-        case types.TOGGLE_ISCHOSETIME:
+        case types.TOGGLE_IS_CHOSE_TIME:
             return state.merge({
                 isChoseTime: action.time
+            });
+        case types.CHANGE_IS_ADMIN:
+            return state.merge({
+                isAdmin: !state.isAdmin
             });
         case types.SOME:
             return state.merge({
@@ -35,8 +39,40 @@ export default function reduce(state = initialState, action = {}) {
             return state.merge({
                 someMovie: action.someMovie
             });
+        case types.ADD_TIME:
+            return state.merge({
+                times: action.times
+            });
+        case types.EDITING_DESCRIPTION:
+            return state.merge({
+                editingDescription: !state.editingDescription
+            });
+        case types.DESCRIPTION:
+            return state.merge({
+                movies: action.movies
+            });
         default:
             return state;
+    }
+}
+
+function forSort(time1,time2) {
+    let hour1 = time1.slice(0,2);
+    let hour2 = time2.slice(0,2);
+    let min1 = time1.slice(3);
+    let min2 = time2.search(3);
+    if(+hour1 > +hour2){
+        return 1
+    } else if(+hour1 < +hour2){
+        return -1
+    } else if(+hour1 === +hour2){
+        if(+hour1 > +hour2){
+            return 1
+        } else if(+min1 < +min2){
+            return -1
+        } else if(+min1 === +min2){
+            return 0
+        }
     }
 }
 
@@ -44,6 +80,14 @@ export default function reduce(state = initialState, action = {}) {
 
 export function getSome(state) {
     return state.movieInfo.some;
+}
+
+export function checkEditingDescription(state) {
+    return state.movieInfo.editingDescription;
+}
+
+export function checkIsAdmin(state) {
+    return state.movieInfo.isAdmin;
 }
 
 export function checkChoseTime(state) {
@@ -55,6 +99,7 @@ export function getPlaces(state) {
 }
 
 export function getTimes(state) {
+    //let time = [state.movieInfo.times.sort(forSort)];
     return state.movieInfo.times;
 }
 
