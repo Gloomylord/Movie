@@ -26,6 +26,7 @@ class MovieInfo extends Component {
             this.setState({
                 description: this.refTextArea.current.value
             })
+            this.props.dispatch(Actions.changeDescription(this.state.movieInfo.id,this.refTextArea.current.value));
         }
     };
 
@@ -37,7 +38,7 @@ class MovieInfo extends Component {
         if (nextProps.movieInfo !== this.props.movieInfo || nextProps.movieInfo !== this.state.movieInfo) {
             this.setState({
                 movieInfo: nextProps.movieInfo
-            })
+            });
         }
 
     }
@@ -51,6 +52,14 @@ class MovieInfo extends Component {
                             <img className='img-style-info img'
                                  src={this.state.movieInfo.url}
                             />
+                            {this.props.isAdmin ?
+                                <div>
+                                    <button className='btn-time change-description'
+                                    onClick={()=>this.props.dispatch(Actions.changeEditingImg())}>
+                                        {!this.props.editingImg ? 'Изменить' : "Сохранить"}
+                                    </button>
+                                </div> : ''
+                            }
                         </div>
                         <div className='some-info'>
                             <div className='text-color-main movie-name'>{this.state.movieInfo.name}</div>
@@ -75,7 +84,7 @@ class MovieInfo extends Component {
                             }
                             <div className='end'>
                                 <div className='text-color-main where-watch'>Когда планируем смотреть?</div>
-                                <ChoseTimes movieInfo={this.state.movieInfo}/>
+                                <ChoseTimes movieInfo={this.state.movieInfo} showMessage={this.props.showMessage}/>
                             </div>
                         </div>
                     </div>
@@ -93,8 +102,8 @@ function mapStateToProps(state) {
         movieInfo: Selectors.getMovieInfo(state),
         routing: routerReducer,
         isAdmin: Selectors.checkIsAdmin(state),
-        showMsg: state.movieInfo.showMsg,
-        editingDescription: checkEditingDescription(state),
+        editingDescription: Selectors.checkEditingDescription(state),
+        editingImg: Selectors.checkEditingImg(state),
     };
 }
 

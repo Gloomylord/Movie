@@ -14,7 +14,8 @@ const initialState = Immutable({
     places: places,
     isAdmin: false,
     editingDescription: false,
-
+    editingImg: false,
+    editingTime: false,
 });
 
 export default function reduce(state = initialState, action = {}) {
@@ -39,7 +40,7 @@ export default function reduce(state = initialState, action = {}) {
             return state.merge({
                 someMovie: action.someMovie
             });
-        case types.ADD_TIME:
+        case types.CHANGE_TIME:
             return state.merge({
                 times: action.times
             });
@@ -51,16 +52,24 @@ export default function reduce(state = initialState, action = {}) {
             return state.merge({
                 movies: action.movies
             });
+        case types.EDITING_IMG:
+            return state.merge({
+                editingImg: !state.editingImg
+            });
+        case types.EDITING_TIME:
+            return state.merge({
+                editingTime: !state.editingTime
+            });
         default:
             return state;
     }
 }
 
 function forSort(time1,time2) {
-    let hour1 = time1.slice(0,2);
-    let hour2 = time2.slice(0,2);
-    let min1 = time1.slice(3);
-    let min2 = time2.search(3);
+    let hour1 = time1.time.slice(0,2);
+    let hour2 = time2.time.slice(0,2);
+    let min1 = time1.time.slice(3);
+    let min2 = time2.time.search(3);
     if(+hour1 > +hour2){
         return 1
     } else if(+hour1 < +hour2){
@@ -82,6 +91,14 @@ export function getSome(state) {
     return state.movieInfo.some;
 }
 
+export function checkEditingTime(state) {
+    return state.movieInfo.editingTime;
+}
+
+export function checkEditingImg(state) {
+    return state.movieInfo.editingImg;
+}
+
 export function checkEditingDescription(state) {
     return state.movieInfo.editingDescription;
 }
@@ -99,8 +116,12 @@ export function getPlaces(state) {
 }
 
 export function getTimes(state) {
-    //let time = [state.movieInfo.times.sort(forSort)];
-    return state.movieInfo.times;
+    let newTime=[];
+    state.movieInfo.times.forEach((value => {
+        newTime.push(value);
+    }));
+    newTime.sort(forSort);
+    return newTime;
 }
 
 export function getMovieInfo(state) {

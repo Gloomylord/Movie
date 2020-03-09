@@ -2,15 +2,23 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import TopMenu from './containers/TopMenu';
 import MainPart from "./containers/MainPart";
+import {ToastContainer, toast} from 'react-toastify';
 
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
 class App extends Component {
+
+    showMessage = (str) => {
+        toast.info(str,);
+    }
+
     render() {
         return (
             <div className="App">
                 <TopMenu/>
-                <MainPart/>
+                <MainPart showMessage={this.showMessage}/>
+                <ToastContainer position={toast.POSITION.BOTTOM_RIGHT}   />
             </div>
         );
     }

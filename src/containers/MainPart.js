@@ -29,7 +29,7 @@ class MainPart extends Component {
                         <GetMovie/>
                     </Route>
                     <Route path={`/movie/:topicId`} exact>
-                        <MovieInfo/>
+                        <MovieInfo showMessage={this.props.showMessage}/>
                     </Route>
                     <Route path={`/movie/reservation/:topicId`}>
                         <Reservation/>

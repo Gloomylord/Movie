@@ -22,7 +22,7 @@ class TopMenu extends Component {
                         </NavLink>
                         <div className='center pointer top-button'
                              onClick={()=>this.props.dispatch(Actions.changeAdmin())}
-                        >Редактировать</div>
+                        >{!this.props.isAdmin ? 'Редактировать': 'Закончить редактирование'}</div>
                     </div>
                     <Search/>
                 </div>

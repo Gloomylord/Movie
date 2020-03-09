@@ -19,3 +19,19 @@
     padding-right: 20px !important;
     padding-left: 20px !important;
 }
+
+.add-movie:hover {
+    border: #4a7044 solid 1px;
+}
+
+.add-movie:hover * {
+    color: #4a7044;
+}
+
+.add-movie:active {
+    border: #706c32 solid 1px;
+}
+
+.add-movie:active * {
+    color: #706c32;
+}
