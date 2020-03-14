@@ -16,6 +16,8 @@ const initialState = Immutable({
     editingDescription: false,
     editingImg: false,
     editingTime: false,
+    addMovie: false,
+    isDark: true,
 });
 
 export default function reduce(state = initialState, action = {}) {
@@ -60,6 +62,14 @@ export default function reduce(state = initialState, action = {}) {
             return state.merge({
                 editingTime: !state.editingTime
             });
+        case types.ADD_MOVIE:
+            return state.merge({
+                addMovie: !state.addMovie
+            });
+        case types.CHANGE_DARK:
+            return state.merge({
+                isDark: !state.isDark
+            });
         default:
             return state;
     }
@@ -91,6 +101,14 @@ export function getSome(state) {
     return state.movieInfo.some;
 }
 
+export function checkIsDark(state) {
+    return state.movieInfo.isDark;
+}
+
+export function checkAddMovie(state) {
+    return state.movieInfo.addMovie;
+}
+
 export function checkEditingTime(state) {
     return state.movieInfo.editingTime;
 }
@@ -118,7 +136,7 @@ export function getPlaces(state) {
 export function getTimes(state) {
     let newTime=[];
     state.movieInfo.times.forEach((value => {
-        newTime.push(value);
+       newTime.push(value);
     }));
     newTime.sort(forSort);
     return newTime;

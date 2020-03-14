@@ -7,6 +7,7 @@ import {
     withRouter,
 } from "react-router-dom";
 import {routerReducer} from 'react-router-redux';
+import cn from "classnames"
 
 import '../iconmonstr-iconic-font-1.3.0/css/iconmonstr-iconic-font.min.css';
 import '../iconmonstr-iconic-font-1.3.0/css/iconmonstr-iconic-font.css';
@@ -39,25 +40,35 @@ class TimeTable extends Component {
 
     render() {
         let movies = this.selectTimeTable();
-        let timeList = movies.map((value) => <div key={value.id} className='one-movie-time-tables'>
+        let timeList = movies.map((value) => <div key={value.id} className={cn('one-movie-time-tables',{
+            'border-for-dark':this.props.isDark,
+            'border-for-white':!this.props.isDark})}>
             <div className='margin-auto'>
                 <img className='img-style-time-table'
                      src={value.url}
                 />
             </div>
-            <div className='text-color-main tile-list' key={'key' + value.times[0]}>
+            <div className={cn('tile-list',{
+                'text-color-main-dark':this.props.isDark,
+                'text-color-main-white':!this.props.isDark,
+            })} key={'key' + value.times[0]}>
                 {value.movieName}
             </div>
             <div className='btn-time-table'>
                 {value.times.map((time) =>
                     !this.props.isAdmin ?
                         <NavLink to={'/movie/reservation/' + value.id + '/' + time} key={time}>
-                            <button className='btn-time ' key={time + '1'}>{time}</button>
+                            <button className={cn({'btn-time-dark':this.props.isDark,
+                                'btn-time-white':!this.props.isDark,
+                            })} key={time + '1'}>{time}</button>
                         </NavLink> :
-                        <button className='btn-time-admin'
+                        <button className={cn({
+                            'btn-time-dark-admin': this.props.isDark,
+                            'btn-time-white-admin': !this.props.isDark,
+                        })}
                                 key={time + '1'}>
                             {time}
-                            <i className="im im-x-mark x-mark"
+                            <i className="im im-x-mark btn-delete-time"
                                onClick={() => this.props.dispatch(Actions.deleteTime(time))}/>
                         </button>)}
 
@@ -67,9 +78,17 @@ class TimeTable extends Component {
         return (
             <div className='time-tables'>
                 {timeList}
-                {this.props.isAdmin ? <div className='one-movie-time-tables add-movie-time-table'>
-                    <i className="im im-plus text-color-main plus"/>
-                    <div className='text-color-main'> Добавить фильм</div>
+                {this.props.isAdmin ? <div className={cn('one-movie-time-tables add-movie-time-table',{
+                    'border-for-dark':this.props.isDark,
+                    'border-for-white':!this.props.isDark})}>
+                    <i className={cn("im im-plus plus",{
+                        'text-color-main-dark':this.props.isDark,
+                        'text-color-main-white':!this.props.isDark,
+                    })}/>
+                    <div className={cn({
+                        'text-color-main-dark':this.props.isDark,
+                        'text-color-main-white':!this.props.isDark,
+                    })}> Добавить фильм</div>
                 </div> : ''}
             </div>
         );
@@ -85,6 +104,7 @@ function mapStateToProps(state) {
         isAdmin: Selectors.checkIsAdmin(state),
         movies: Selectors.getMovies(state),
         editingTime: Selectors.checkEditingTime(state),
+        isDark: Selectors.checkIsDark(state),
     };
 }
 

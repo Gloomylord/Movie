@@ -9,9 +9,16 @@ import './App.css';
 
 class App extends Component {
 
-    showMessage = (str) => {
-        toast.info(str,);
-    }
+    showMessage = (str, className) => {
+        if(className) {
+            toast(str, {
+                className: className
+            });
+        } else {
+            toast.info(str);
+        }
+
+    };
 
     render() {
         return (

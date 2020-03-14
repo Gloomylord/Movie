@@ -2,6 +2,7 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import * as Selectors from '../store/MoviesInfo/reducer';
 import './styleFiles/Search.css';
+import cn from 'classnames'
 import * as Actions from "../store/MoviesInfo/actions";
 
 class Search extends PureComponent {
@@ -23,9 +24,15 @@ class Search extends PureComponent {
         return (<div className='block'>
             <input ref={this.refSearch}
                    onClick={this.clickSearch}
-                   className={'center input-top ' + (!this.props.some ? 'search-up' : 'search-down')}/>
-            <div className='search center pointer' onClick={this.clickSearch}/>
+                   className={cn('center',{
+                       'search-up':!this.props.some,
+                       'search-down':this.props.some,
+                       'input-top-dark': this.props.isDark,
+                       'input-top-white': !this.props.isDark,
+                   })}/>
+            <div className='search center pointer' title='Поиск' onClick={this.clickSearch}/>
         </div>)
+
     }
 }
 
@@ -35,7 +42,8 @@ function mapStateToProps(state) {
     return {
         some,
         isAdmin: Selectors.checkIsAdmin(state),
-        showMsg: state.movieInfo.showMsg
+        showMsg: state.movieInfo.showMsg,
+        isDark: Selectors.checkIsDark(state),
     };
 }
 

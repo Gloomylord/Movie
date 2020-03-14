@@ -1,7 +1,5 @@
 import * as types from './actionTypes';
 import * as movieInfoSelectors from './reducer';
-import Immutable from 'seamless-immutable';
-
 
 export function changeSome() {
     return ({type: types.SOME});
@@ -15,23 +13,26 @@ export function changeEditingImg() {
     return ({type: types.EDITING_IMG});
 }
 
+export function changeDark() {
+    return ({type: types.CHANGE_DARK});
+}
+
+
+export function changeShowAddMovie() {
+    return ({type: types.ADD_MOVIE});
+}
+
 export function changeDescription(id,description) {
     return (dispatch, getState) => {
         let movies = movieInfoSelectors.getMovies(getState()).map((some) => {
-            console.log(some.id, id)
             if (some.id === id) {
                 return {id: some.id , name: some.name, url: some.url, description: description }
             } else {
                 return some;
             }
         });
-        console.log(movies, description);
         dispatch({type: types.DESCRIPTION, movies});
     };
-}
-
-export function changeTimeChose(time) {
-    return ({type: types.TOGGLE_IS_CHOSE_TIME, time});
 }
 
 export function changeEditingTime() {
@@ -54,7 +55,6 @@ export function changeMovie(id) {
     } else {
         return (dispatch, getState) => {
             let p = null;
-            console.log('it work');
             dispatch({type: types.SOME_MOVIE, p});
 
         };

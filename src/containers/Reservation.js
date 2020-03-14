@@ -65,6 +65,7 @@ function mapStateToProps(state) {
         showMsg: state.movieInfo.showMsg,
         isAdmin: Selectors.checkIsAdmin(state),
         places: Selectors.getPlaces(state),
+        isDark: Selectors.checkIsDark(state),
     };
 }
 

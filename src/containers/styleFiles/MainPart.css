@@ -1,7 +1,6 @@
-.main-style{
-    background-color: #2f2f2f;
-    width: 85%;
-
+.main-style-dark{
+    background-color: var(--main-bg-color-dark);
+    width: 86%;
     align-self: center;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -10,10 +9,34 @@
     border-top: 0 solid red;
     padding: 40px;
 }
-.text-color-main{
+
+.main-style-white{
+    background-color:var(--main-bg-color-white);
+    width: 86%;
+    align-self: center;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin-bottom: 40px;
+    border: #888888 solid 5px;
+    border-top: 0 solid red;
+    padding: 40px;
+}
+
+.main-style-add-movie{
+    display: flex;
+    flex-direction: column;
+}
+
+.text-color-main-dark{
     color: #aaaaaa;
     margin: 5px;
 }
+
+.text-color-main-white{
+    color: rgba(0, 0, 0, 0.79);
+    margin: 5px;
+}
+
 .title{
     font-size: 30px;
     margin-bottom: 30px;

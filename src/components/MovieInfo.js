@@ -8,7 +8,7 @@ import {
     withRouter,
 } from "react-router-dom";
 import {routerReducer} from 'react-router-redux';
-import {checkEditingDescription} from "../store/MoviesInfo/reducer";
+import cn from 'classnames';
 
 
 class MovieInfo extends Component {
@@ -22,11 +22,11 @@ class MovieInfo extends Component {
 
     changeEditingDescription = () => {
         this.props.dispatch(Actions.changeEditingDescription());
-        if(this.props.editingDescription && this.state.movieInfo){
+        if (this.props.editingDescription && this.state.movieInfo) {
             this.setState({
                 description: this.refTextArea.current.value
-            })
-            this.props.dispatch(Actions.changeDescription(this.state.movieInfo.id,this.refTextArea.current.value));
+            });
+            this.props.dispatch(Actions.changeDescription(this.state.movieInfo.id, this.refTextArea.current.value));
         }
     };
 
@@ -54,18 +54,27 @@ class MovieInfo extends Component {
                             />
                             {this.props.isAdmin ?
                                 <div>
-                                    <button className='btn-time change-description'
-                                    onClick={()=>this.props.dispatch(Actions.changeEditingImg())}>
+                                    <button className='btn-change-some change-description'
+                                            onClick={() => this.props.dispatch(Actions.changeEditingImg())}>
                                         {!this.props.editingImg ? 'Изменить' : "Сохранить"}
                                     </button>
                                 </div> : ''
                             }
                         </div>
-                        <div className='some-info'>
-                            <div className='text-color-main movie-name'>{this.state.movieInfo.name}</div>
+                        <div className={cn('some-info', {
+                            'border-for-dark': this.props.isDark,
+                            'border-for-white': !this.props.isDark
+                        })}>
+                            <div className={cn({
+                                'movie-name-dark': this.props.isDark,
+                                'movie-name-white': !this.props.isDark
+                            })}>{this.state.movieInfo.name}</div>
                             {!this.props.editingDescription ?
                                 <div ref={this.refDescription}
-                                     className='text-color-main description'>
+                                     className={cn('description', {
+                                         'text-color-main-dark': this.props.isDark,
+                                         'text-color-main-white': !this.props.isDark
+                                     })}>
                                     {!this.state.description ? this.state.movieInfo.description : this.state.description}
                                 </div> :
                                 <textarea
@@ -76,21 +85,31 @@ class MovieInfo extends Component {
                             }
                             {this.props.isAdmin ?
                                 <div>
-                                    <button className='btn-time change-description'
+                                    <button className='btn-change-some change-description'
                                             onClick={this.changeEditingDescription}>
                                         {!this.props.editingDescription ? 'Изменить' : "Сохранить"}
                                     </button>
                                 </div> : ''
                             }
                             <div className='end'>
-                                <div className='text-color-main where-watch'>Когда планируем смотреть?</div>
+                                <div className={cn('where-watch', {
+                                    'text-color-main-dark': this.props.isDark,
+                                    'text-color-main-white': !this.props.isDark
+                                })}>Когда планируем смотреть?
+                                </div>
                                 <ChoseTimes movieInfo={this.state.movieInfo} showMessage={this.props.showMessage}/>
                             </div>
                         </div>
                     </div>
                     : (this.state.movieInfo === null) ?
-                        <div className='text-color-main'>Подождите немного</div>
-                        : <div className='text-color-main'>Такой страницы нет</div>}
+                        <div className={cn({
+                            'text-color-main-dark': this.props.isDark,
+                            'text-color-main-white': !this.props.isDark
+                        })}>Подождите немного</div>
+                        : <div className={cn({
+                            'text-color-main-dark': this.props.isDark,
+                            'text-color-main-white': !this.props.isDark
+                        })}>Такой страницы нет</div>}
             </Fragment>
         );
     }
@@ -104,6 +123,7 @@ function mapStateToProps(state) {
         isAdmin: Selectors.checkIsAdmin(state),
         editingDescription: Selectors.checkEditingDescription(state),
         editingImg: Selectors.checkEditingImg(state),
+        isDark: Selectors.checkIsDark(state),
     };
 }
 

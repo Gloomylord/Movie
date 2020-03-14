@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import * as Selectors from '../store/MoviesInfo/reducer';
 import './styleFiles/Movie.css'
 import {Link} from "react-router-dom";
+import cn from "classnames";
 
 class Movie extends Component {
     state = {
@@ -17,7 +18,10 @@ class Movie extends Component {
                          src={this.state.movieInfo.url}
                     />
                 </Link>
-                <div className='text-color-main'>{this.state.movieInfo.name}</div>
+                <div className={cn({
+                    'text-color-main-dark':this.props.isDark,
+                    'text-color-main-white':!this.props.isDark
+                })}>{this.state.movieInfo.name}</div>
             </div>
         );
     }
@@ -28,7 +32,8 @@ function mapStateToProps(state) {
     return {
         movies,
         isAdmin: Selectors.checkIsAdmin(state),
-        showMsg: state.movieInfo.showMsg
+        showMsg: state.movieInfo.showMsg,
+        isDark: Selectors.checkIsDark(state),
     };
 }
 
