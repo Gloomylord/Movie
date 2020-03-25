@@ -12,9 +12,12 @@ class Movie extends Component {
 
     render() {
         return (
-            <div key={this.state.movieInfo.id} className='movie-img-style' onClick={this.changeMovie}>
+            <div key={this.state.movieInfo.id} className='movie-img-style-white' onClick={this.changeMovie}>
                 <Link to={'/movie/' + this.state.movieInfo.id}>
-                    <img className='pointer img-style'
+                    <img className={cn('pointer img-style',{
+                        'img-style-dark': this.props.isDark,
+                        'img-style-white': !this.props.isDark,
+                    })}
                          src={this.state.movieInfo.url}
                     />
                 </Link>
@@ -34,6 +37,7 @@ function mapStateToProps(state) {
         isAdmin: Selectors.checkIsAdmin(state),
         showMsg: state.movieInfo.showMsg,
         isDark: Selectors.checkIsDark(state),
+
     };
 }
 

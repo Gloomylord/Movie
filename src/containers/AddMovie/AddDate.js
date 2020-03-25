@@ -6,6 +6,7 @@ import '../../iconmonstr-iconic-font-1.3.0/css/iconmonstr-iconic-font.min.css';
 import '../../iconmonstr-iconic-font-1.3.0/css/iconmonstr-iconic-font.css';
 
 import './AddMovie.css'
+import cn from "classnames";
 
 class AddDate extends PureComponent {
 
@@ -14,36 +15,50 @@ class AddDate extends PureComponent {
     };
 
     onChange = (e) => {
-        let date_time = new Date();
-        let date = new Date(date_time.getUTCFullYear(), date_time.getUTCMonth(), date_time.getUTCDate() + 1, 0, 0, 0, 0);
-        let newDate = new Date(e.target.value);
-        console.log('now: ', date_time, 'new: ', newDate, 'fgvhbj', newDate - date);
-        console.log('only date: ', date);
-        if (newDate - date >= 0) {
-            this.setState({date: e.target.value});
-        } else {
-            this.props.showMessage('дата должна быть после '+date_time.getUTCFullYear()+'-'+ date_time.getUTCMonth()+'-'+ (date_time.getUTCDate()-1));
-        }
+        this.setState({date: e.target.value});
     };
 
     addDate = () => {
         if (this.state.date) {
-            this.props.addDate(this.state.date);
-            this.setState({date: '0000-00-00'})
+            if (this.checkDateIsExpired(this.state.date)) {
+                this.props.addDate(this.state.date);
+                this.setState({date: '0000-00-00'})
+            }
         } else {
             this.props.showMessage('Сперва выберите дату');
+        }
+    };
+
+    checkDateIsExpired = (checkDate) => {
+        let date_time = new Date();
+        let date = new Date(
+            date_time.getUTCFullYear(),
+            date_time.getUTCMonth(),
+            date_time.getUTCDate(),
+            0, 0, 0, 0);
+        let newDate = new Date(checkDate);
+        if (newDate - date >= 0) {
+            return true
+        } else {
+            this.props.showMessage('дата должна быть после ' + date_time.getUTCFullYear() + '-' + date_time.getUTCMonth() + '-' + (date_time.getUTCDate() - 1));
+            return false
         }
     };
 
     render() {
         return (
             <>
-                <div className=' text-color-main data-time'>
-                    <div className='date'>
-                        <div className='text-color-main input-name '>Добавить дату:</div>
+                <div className=' data-time-table'>
+                    <div className='date' style={{width: '100%'}}>
+                        <div className={cn('input-name', {
+                            'text-color-main-dark': this.props.isDark,
+                            'text-color-main-white': !this.props.isDark,
+                        })}>Добавить дату:
+                        </div>
                         <input value={this.state.date} onChange={this.onChange}
                                className='add-movie-input date time-pos' type='date'/>
-                        <button key='will add' className='btn-change-some  btn-time-add pointer none-margin'
+                        <button key='will add' type='button'
+                                className='btn-change-some  btn-time-add pointer none-margin'
                                 onClick={this.addDate}>
                             <i key='will add' className="im im-plus time-add"/>
                         </button>

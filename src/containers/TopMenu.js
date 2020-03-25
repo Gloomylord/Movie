@@ -9,6 +9,12 @@ import {NavLink} from "react-router-dom";
 
 class TopMenu extends Component {
 
+    closeAddMovie = () => {
+        if (this.props.addMovie) {
+            this.props.dispatch(Actions.changeShowAddMovie());
+        }
+    };
+
     render() {
         let isDark = this.props.isDark;
         return (
@@ -19,31 +25,38 @@ class TopMenu extends Component {
                             <div className={cn('center pointer', {
                                 'top-button-dark': isDark,
                                 'top-button-white': !isDark
-                            })}>Главная
+                            })}
+                                 onClick={this.closeAddMovie}>Главная
                             </div>
                         </NavLink>
                         <NavLink className='nav' to="/timetable">
                             <div className={cn('center pointer', {
                                 'top-button-dark': isDark,
                                 'top-button-white': !isDark
-                            })}>Расписание
+                            })}
+                                 onClick={this.closeAddMovie}>Расписание
                             </div>
                         </NavLink>
                         <div className={cn('center pointer', {'top-button-dark': isDark, 'top-button-white': !isDark})}
-                             onClick={() => this.props.dispatch(Actions.changeAdmin())}
+                             onClick={() => {this.props.dispatch(Actions.changeAdmin()); this.closeAddMovie();}}
                         >{!this.props.isAdmin ? 'Редактировать' : 'Закончить редактирование'}</div>
                     </div>
-                    <Search/>
+
                 </div>
-                <div className={cn('change-dark ')}>
+                <div className='change-dark circle-wr'
+                     title={cn({'светлая тема': this.props.isDark, 'темная тема': !this.props.isDark})}
+                     onClick={() => this.props.dispatch(Actions.changeDark())}>
                     <div className={cn('circle', {
                         'dark-true': isDark,
                         'dark-false': !isDark
-                    })} onClick={() => this.props.dispatch(Actions.changeDark())}/>
+                    })}/>
                 </div>
                 <NavLink className='nav about-us' to="/about_us">
-                    <div className={cn('center pointer', {'top-button-dark': isDark, 'top-button-white': !isDark})}>О
-                        сервисе
+                    <div className={cn('center pointer', {
+                        'top-button-dark': isDark,
+                        'top-button-white': !isDark})}
+                         onClick={this.closeAddMovie}
+                    >О сервисе
                     </div>
                 </NavLink>
             </div>
@@ -58,6 +71,7 @@ function mapStateToProps(state) {
         isAdmin: Selectors.checkIsAdmin(state),
         showMsg: state.movieInfo.showMsg,
         isDark: Selectors.checkIsDark(state),
+        addMovie: Selectors.checkAddMovie(state),
     };
 }
 

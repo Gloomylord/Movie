@@ -2,9 +2,9 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 30px;
     width: 45%;
     align-self: center;
+    margin-bottom: 30px;
 }
 
 .x-mark-circle-o{
@@ -66,6 +66,19 @@
     margin-top: 20px !important;
 }
 
+.data-time-table{
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.data-time-1{
+    margin-left: 10px;
+    width: 325px;
+    margin-top: 20px !important;
+}
+
 .div-add-time{
     display: flex;
     flex-direction: column;
@@ -96,4 +109,8 @@
     flex-direction: row;
     border: solid black 2px;
     border-radius: 6px;
+}
+
+.btn-add-movie{
+
 }

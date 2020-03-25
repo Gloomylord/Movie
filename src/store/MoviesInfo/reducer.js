@@ -1,16 +1,13 @@
 import * as types from './actionTypes';
 import Immutable from 'seamless-immutable';
-import some from "./some";
-import times from "./times";
 import places from "./Places";
 
 const initialState = Immutable({
     some: false,
     showMsg: true,
     someMovie: null,
-    movies: some,
-    times: times,
-    isChoseTime: false,
+    movies: null,
+    times: null,
     places: places,
     isAdmin: false,
     editingDescription: false,
@@ -18,13 +15,16 @@ const initialState = Immutable({
     editingTime: false,
     addMovie: false,
     isDark: true,
+    timesForOneMovie: null,
+    selectDate: null,
+    addDay: 0,
 });
 
 export default function reduce(state = initialState, action = {}) {
     switch (action.type) {
-        case types.TOGGLE_IS_CHOSE_TIME:
+        case types.ADD_DAY:
             return state.merge({
-                isChoseTime: action.time
+                addDay: action.addDay
             });
         case types.CHANGE_IS_ADMIN:
             return state.merge({
@@ -70,30 +70,19 @@ export default function reduce(state = initialState, action = {}) {
             return state.merge({
                 isDark: !state.isDark
             });
+        case types.CHANGE_TIME_ONE_MOVIE:
+            return state.merge({
+                timesForOneMovie: action.timesForOneMovie
+            });
+        case types.CHANGE_DATE:
+            return state.merge({
+                selectDate: action.selectDate
+            });
         default:
             return state;
     }
 }
 
-function forSort(time1,time2) {
-    let hour1 = time1.time.slice(0,2);
-    let hour2 = time2.time.slice(0,2);
-    let min1 = time1.time.slice(3);
-    let min2 = time2.time.search(3);
-    if(+hour1 > +hour2){
-        return 1
-    } else if(+hour1 < +hour2){
-        return -1
-    } else if(+hour1 === +hour2){
-        if(+hour1 > +hour2){
-            return 1
-        } else if(+min1 < +min2){
-            return -1
-        } else if(+min1 === +min2){
-            return 0
-        }
-    }
-}
 
 // selectors
 
@@ -101,8 +90,20 @@ export function getSome(state) {
     return state.movieInfo.some;
 }
 
+export function selectDate(state) {
+    return state.movieInfo.selectDate;
+}
+
+export function getAddDay(state) {
+    return state.movieInfo.addDay;
+}
+
 export function checkIsDark(state) {
     return state.movieInfo.isDark;
+}
+
+export function getTimesOneMovie(state) {
+    return state.movieInfo.timesForOneMovie;
 }
 
 export function checkAddMovie(state) {
@@ -125,21 +126,12 @@ export function checkIsAdmin(state) {
     return state.movieInfo.isAdmin;
 }
 
-export function checkChoseTime(state) {
-    return state.movieInfo.isChoseTime;
-}
-
 export function getPlaces(state) {
     return state.movieInfo.places;
 }
 
 export function getTimes(state) {
-    let newTime=[];
-    state.movieInfo.times.forEach((value => {
-       newTime.push(value);
-    }));
-    newTime.sort(forSort);
-    return newTime;
+    return state.movieInfo.times;
 }
 
 export function getMovieInfo(state) {

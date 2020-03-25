@@ -33,7 +33,7 @@ const customStyles = {
 
 class SingleSelect extends Component {
     state = {
-        isSelected: false,
+        isSelected: true,
         isClearable: true,
         isDisabled: false,
         isLoading: false,
@@ -61,7 +61,7 @@ class SingleSelect extends Component {
         return (
             <Fragment>
                 <Select
-                    className="basic-single mt-20 select"
+                    className="basic-single mt-20 select add-movie-div "
                     classNamePrefix="select"
                     defaultValue={'зал 1'}
                     isDisabled={isDisabled}
@@ -69,7 +69,6 @@ class SingleSelect extends Component {
                     isClearable={isClearable}
                     isRtl={isRtl}
                     isSearchable={isSearchable}
-                    name="color"
                     options={options}
                     styles={customStyles}
                 />

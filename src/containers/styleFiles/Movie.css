@@ -1,6 +1,25 @@
-.movie-img-style {
+.movie-img-style-dark {
     margin: 20px;
     padding: 5px;
+    transition: transform .1s ease;
+}
+
+.movie-img-style-dark:hover > div{
+    color: white;
+}
+
+.movie-img-style-white {
+    margin: 20px;
+    padding: 5px;
+    transition: transform .1s ease;
+}
+
+.movie-img-style-dark:hover, .movie-img-style-white:hover {
+    transform: rotate(-3deg);
+}
+
+.movie-img-style-white:hover > div{
+    color: #aaaaaa;
 }
 
 .img-style {
@@ -11,12 +30,22 @@
     min-height: 200px;
 }
 
-.img-style:hover {
+.img-style-dark:hover {
     margin: 0;
     border: #aaaaaa solid 1px;
 }
 
-.img-style:active {
+.img-style-dark:active {
     margin: 0;
     border: #4f4c4e solid 1px;
+}
+
+.img-style-dark:hover {
+    margin: 0;
+    border: #1d1d1d solid 1px;
+}
+
+.img-style-dark:active {
+    margin: 0;
+    border: #726d71 solid 1px;
 }

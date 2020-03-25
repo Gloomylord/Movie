@@ -27,7 +27,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 80%;
+    width: 35%;
 }
 .top-button-dark{
     color: #95958d;
@@ -82,6 +82,10 @@
 
 .dark-true{
     left: -2px;
+}
+
+.circle-wr {
+    cursor: pointer;
 }
 
 .circle{

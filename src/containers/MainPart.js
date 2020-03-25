@@ -9,7 +9,7 @@ import {
     withRouter,
 } from "react-router-dom";
 import {routerReducer} from 'react-router-redux';
-import TimeTable from "./TimeTable";
+import TimeTable from "./TimeTable/TimeTable";
 import AboutUs from "../components/AboutUs";
 import Reservation from "./Reservation";
 import AddMovie from "./AddMovie/AddMovie";

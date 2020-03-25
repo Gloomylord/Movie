@@ -5,8 +5,79 @@ export function changeSome() {
     return ({type: types.SOME});
 }
 
+export function fetchMovies() {
+    return async (dispatch) => {
+        let movies;
+        try {
+            let response = await fetch('/api/movies', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify({list: 'get All'})
+            });
+            let start = await response.json();
+            if (start.movies) {
+                movies = start.movies;
+            }
+        } catch (e) {
+            console.log('error: ', e);
+        }
+        dispatch({type: types.DESCRIPTION, movies});
+    };
+}
+
+export function fetchSessions(id) {
+    return async (dispatch) => {
+        let timesForOneMovie;
+        try {
+            let response = await fetch('/api/sessions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify({id: id})
+            });
+            let res = await response.json();
+            if (res.sessions) {
+                timesForOneMovie = res.sessions;
+            }
+        } catch (e) {
+            console.log('error: ', e);
+        }
+        dispatch({type: types.CHANGE_TIME_ONE_MOVIE, timesForOneMovie});
+    };
+}
+
+export function fetchAllSessions() {
+    return async (dispatch) => {
+        let times;
+        try {
+            let response = await fetch('/api/allsessions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify({message: 'top'})
+            });
+            let res = await response.json();
+            if (res.sessions) {
+                times = res.sessions;
+            }
+        } catch (e) {
+            console.log('error: ', e);
+        }
+        dispatch({type: types.CHANGE_TIME, times});
+    };
+}
+
 export function changeEditingDescription() {
     return ({type: types.EDITING_DESCRIPTION});
+}
+
+export function changeDate(selectDate) {
+    console.log('date', selectDate);
+    return ({type: types.CHANGE_DATE, selectDate});
 }
 
 export function changeEditingImg() {
@@ -17,68 +88,96 @@ export function changeDark() {
     return ({type: types.CHANGE_DARK});
 }
 
-
-export function changeShowAddMovie() {
-    return ({type: types.ADD_MOVIE});
-}
-
-export function changeDescription(id,description) {
-    return (dispatch, getState) => {
-        let movies = movieInfoSelectors.getMovies(getState()).map((some) => {
-            if (some.id === id) {
-                return {id: some.id , name: some.name, url: some.url, description: description }
-            } else {
-                return some;
-            }
-        });
-        dispatch({type: types.DESCRIPTION, movies});
-    };
-}
+export const changeShowAddMovie = () => ({type: types.ADD_MOVIE});
 
 export function changeEditingTime() {
     return ({type: types.EDITING_TIME});
 }
 
+export function addDayPlus() {
+    return (dispatch, getState) => {
+        movieInfoSelectors.getTimesOneMovie(getState());
+        dispatch({type: types.ADD_DAY, addDay: 1 + movieInfoSelectors.getAddDay(getState())});
+    }
+}
+
+export function addDayMinus() {
+    return (dispatch, getState) => {
+        movieInfoSelectors.getTimesOneMovie(getState());
+        dispatch({type: types.ADD_DAY, addDay: movieInfoSelectors.getAddDay(getState()) - 1});
+    }
+}
+
 export function changeMovie(id) {
-    if (id) {
-        return (dispatch, getState) => {
-            const movies = movieInfoSelectors.getMovies(getState());
-            let someMovie;
-            movies.forEach((some) => {
-                if (some.id === id) {
-                    someMovie = some;
+    return async (dispatch) => {
+        let someMovie;
+        try {
+            let response = await fetch('/api/movies', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify({id: id})
+            });
+            let res = await response.json();
+            if (res.movie[0]) {
+                someMovie = res.movie[0];
+            } else {
+                someMovie = null;
+            }
+        } catch (e) {
+            console.log('error: ', e);
+        }
+        dispatch({type: types.SOME_MOVIE, someMovie});
+    };
+}
+
+export function addDateTimeOneMovie(time, date) {
+    return (dispatch, getState) => {
+        console.log('time: ', time, 'date: ', date);
+        let timesForOneMovie, start = true;
+        let newTimes = movieInfoSelectors.getTimesOneMovie(getState());
+        if (newTimes) {
+            timesForOneMovie = newTimes.map((value) => {
+                if (value.time === null && value.date === date) {
+                    start = false;
+                    return {time: time, date: date}
+                } else {
+                    return value
                 }
             });
-            dispatch({type: types.SOME_MOVIE, someMovie});
-
-        };
-    } else {
-        return (dispatch, getState) => {
-            let p = null;
-            dispatch({type: types.SOME_MOVIE, p});
-
-        };
-    }
-
-}
-
-export function addTime(time,movieName) {
-    return (dispatch,getState) => {
-        let newTimes = movieInfoSelectors.getTimes(getState()).concat([{time: time, movieName: movieName}]);
-        console.log(newTimes);
-         dispatch({type: types.CHANGE_TIME, times: newTimes});
+            if (start) {
+                timesForOneMovie = movieInfoSelectors.getTimesOneMovie(getState()).concat([{time: time, date: date}]);
+            }
+        } else {
+            timesForOneMovie = [{time: time, date: date}];
+        }
+        dispatch({type: types.CHANGE_TIME_ONE_MOVIE, timesForOneMovie});
     }
 }
 
-export function deleteTime(time) {
-    let newTimes=[];
+export function deleteDateTimeOneMovie(time, date) {
+    return (dispatch, getState) => {
+        let timesForOneMovie = [];
+        movieInfoSelectors.getTimesOneMovie(getState()).forEach((value) => {
+            if (!(value.time === time && value.date === date)) {
+                timesForOneMovie.push(value);
+            }
+        });
+        dispatch({type: types.CHANGE_TIME_ONE_MOVIE, timesForOneMovie});
+    }
+}
+
+
+export function deleteTime(time, date, movieId) {
+    let newTimes = [];
     return (dispatch, getState) => {
         movieInfoSelectors.getTimes(getState()).forEach((some) => {
-            if (some.time !== time) {
+            if (!(some.time === time && some.date === date && some.movieId === movieId)) {
                 newTimes.push(some);
             }
         });
-        dispatch({type: types.CHANGE_TIME, times:newTimes});
+        dispatch({type: types.CHANGE_TIME, times: newTimes});
     };
 }
 

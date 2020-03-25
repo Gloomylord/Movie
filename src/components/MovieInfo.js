@@ -3,8 +3,9 @@ import {connect} from 'react-redux';
 import * as Selectors from '../store/MoviesInfo/reducer';
 import * as Actions from "../store/MoviesInfo/actions";
 import './styleFiles/MovieInfo.css'
-import ChoseTimes from "./ChoseTimes";
+import ChoseDate from "./EditingSessions/ChoseDate";
 import {
+    Link,
     withRouter,
 } from "react-router-dom";
 import {routerReducer} from 'react-router-redux';
@@ -20,45 +21,129 @@ class MovieInfo extends Component {
         description: null,
     };
 
-    changeEditingDescription = () => {
+    changeEditingDescription = async () => {
         this.props.dispatch(Actions.changeEditingDescription());
         if (this.props.editingDescription && this.state.movieInfo) {
             this.setState({
                 description: this.refTextArea.current.value
             });
-            this.props.dispatch(Actions.changeDescription(this.state.movieInfo.id, this.refTextArea.current.value));
+            console.log('start');
+            try {
+                let response = await fetch('/api/description', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    body: JSON.stringify({
+                        id: this.props.match.params.topicId,
+                        description: this.refTextArea.current.value
+                    })
+                });
+                let resalt = await response.json();
+                console.log(resalt);
+            } catch (e) {
+                console.log('error: ', e);
+            }
         }
     };
 
-    componentDidMount() {
-        this.props.dispatch(Actions.changeMovie(this.props.match.params.topicId));
-    }
-
-    componentWillReceiveProps(nextProps, nextContext) {
-        if (nextProps.movieInfo !== this.props.movieInfo || nextProps.movieInfo !== this.state.movieInfo) {
-            this.setState({
-                movieInfo: nextProps.movieInfo
+    async componentDidMount() {
+        try {
+            let response = await fetch('/api/movies', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify({id: this.props.match.params.topicId})
             });
+            let start = await response.json();
+            if (start.movie[0]) {
+                this.setState({
+                    movieInfo: start.movie[0]
+                })
+            }
+            console.log('fetch...');
+            this.props.dispatch(Actions.fetchSessions(this.props.match.params.topicId));
+        } catch (e) {
+            console.log(e);
         }
-
     }
+
+    formElem = async (e) => {
+        e.preventDefault();
+        if (this.props.editingImg) {
+            let body = new FormData(document.getElementById('formElem'));
+            body.append('id', this.props.match.params.topicId);
+            console.log('id', this.props.match.params.topicId);
+            let response = await fetch('/api/changeimg', {
+                method: 'POST',
+                body: body
+            });
+            try {
+                let result = await response.json();
+                if (result.message==="Файл загружен") {
+                    this.props.showMessage(result.message);
+                    try {
+                        let response = await fetch('/api/movies', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json;charset=utf-8'
+                            },
+                            body: JSON.stringify({id: this.props.match.params.topicId})
+                        });
+                        let start = await response.json();
+                        if (start.movie[0]) {
+                            this.setState({
+                                movieInfo: start.movie[0]
+                            })
+                        }
+                        console.log('fetch...');
+                        this.props.dispatch(Actions.changeEditingImg());
+                    } catch (e) {
+                        console.log(e);
+                    }
+                } else {
+                    this.props.showMessage('Файл не загружен');
+                }
+            } catch (err) {
+                if (err.name === 'SyntaxError' || err.name === 'TypeError') {
+                    this.props.showMessage('Тип файла не подходит, попробуйте jpg или png')
+                }
+            }
+        } else {
+            this.props.dispatch(Actions.changeEditingImg());
+        }
+    };
 
     render() {
+        console.log(this.props.dateTime);
         return (
             <Fragment>
                 {(this.state.movieInfo) ?
                     <div key={this.state.movieInfo.id} className='movie-style ' onClick={this.changeMovie}>
-                        <div className='img-background'>
-                            <img className='img-style-info img'
-                                 src={this.state.movieInfo.url}
-                            />
+                        <div className='img-container'>
+                            <div className='img-background'>
+                                <Link to={'/movie/' + this.state.movieInfo.id}>
+                                    <img className='img-style-info img'
+                                         src={this.state.movieInfo.url}
+                                    />
+                                </Link>
+                            </div>
                             {this.props.isAdmin ?
-                                <div>
+                                <form id="formElem"
+                                      ref={this.mainElem}
+                                      className='img-div-input'
+                                      onSubmit={this.formElem}
+                                >
+                                    {this.props.editingImg &&
+                                    <input className='change-img' type='file' name='img'/>
+                                    }
                                     <button className='btn-change-some change-description'
-                                            onClick={() => this.props.dispatch(Actions.changeEditingImg())}>
+                                            onClick={this.changeImg}
+                                            type='submit'>
                                         {!this.props.editingImg ? 'Изменить' : "Сохранить"}
                                     </button>
-                                </div> : ''
+                                </form> : ''
                             }
                         </div>
                         <div className={cn('some-info', {
@@ -92,12 +177,19 @@ class MovieInfo extends Component {
                                 </div> : ''
                             }
                             <div className='end'>
-                                <div className={cn('where-watch', {
-                                    'text-color-main-dark': this.props.isDark,
-                                    'text-color-main-white': !this.props.isDark
-                                })}>Когда планируем смотреть?
-                                </div>
-                                <ChoseTimes movieInfo={this.state.movieInfo} showMessage={this.props.showMessage}/>
+                                {this.props.dateTime && this.props.dateTime.length > 0 ?
+                                    <>
+                                        <div className={cn('where-watch', {
+                                            'text-color-main-dark': this.props.isDark,
+                                            'text-color-main-white': !this.props.isDark
+                                        })}>Когда планируем смотреть?
+                                        </div>
+                                    </>
+                                    : ''
+                                }
+                                < ChoseDate movieInfo={this.state.movieInfo}
+                                            showMessage={this.props.showMessage}/>
+
                             </div>
                         </div>
                     </div>
@@ -117,13 +209,13 @@ class MovieInfo extends Component {
 
 function mapStateToProps(state) {
     return {
-        isChoseTime: Selectors.checkChoseTime(state),
         movieInfo: Selectors.getMovieInfo(state),
         routing: routerReducer,
         isAdmin: Selectors.checkIsAdmin(state),
         editingDescription: Selectors.checkEditingDescription(state),
         editingImg: Selectors.checkEditingImg(state),
         isDark: Selectors.checkIsDark(state),
+        dateTime: Selectors.getTimesOneMovie(state),
     };
 }
 

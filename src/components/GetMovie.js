@@ -10,29 +10,62 @@ import cn from "classnames";
 
 class GetMovie extends Component {
 
-    addMovie = () =>{
-        this.props.dispatch(Actions.changeShowAddMovie());
+    addMovie = () => {
+        console.log('addMovie');
+        this.props.changeShowAddMovie();
+        // this.props.dispatch(Actions.changeShowAddMovie());
     };
 
+    componentDidMount() {
+        this.props.fetchMovies();
+    }
+
     render() {
-        let list = this.props.movies.map(some => <Movie key={some.id} some={some}/>);
+        let list;
+        if (this.props.movies) {
+            list = this.props.movies.map(some => <Movie key={some.id} some={some}/>);
+        } else {
+            list = <div className={cn('title center', {
+                'text-color-main-dark': this.props.isDark,
+                'text-color-main-white': !this.props.isDark
+            })}>Подождите немного</div>
+        }
         return (
             <>
-                <div className={cn('title',{'text-color-main-dark':this.props.isDark,
-                    'text-color-main-white':!this.props.isDark})}>Скоро в кино</div>
+                <div className={cn('title', {
+                    'text-color-main-dark': this.props.isDark,
+                    'text-color-main-white': !this.props.isDark
+                })}>Скоро в кино
+                </div>
                 <div className="movie-list-style">
                     {list}
-                    {this.props.isAdmin ? <div  className='movie-img-style add-movie pointer'
-                                                onClick={this.addMovie}>
-                        <i className={cn("im im-plus plus",
-                            'text-color-main-dark')}/>
-                        <div className='text-color-main-dark'> Добавить фильм </div>
+                    {this.props.isAdmin ? <div className={cn('one-movie-time-tables add-movie-time-table', {
+                        'border-for-dark': this.props.isDark,
+                        'border-for-white': !this.props.isDark
+                    })} onClick={this.addMovie}>
+                        <div className='img-pos'>
+                            <i className={cn("im im-plus plus", {
+                                'text-color-main-dark': this.props.isDark,
+                                'text-color-main-white': !this.props.isDark,
+                            })}/>
+                            <div className={cn({
+                                'text-color-main-dark': this.props.isDark,
+                                'text-color-main-white': !this.props.isDark,
+                            })}> Добавить фильм
+                            </div>
+                        </div>
                     </div> : null}
                 </div>
             </>
         );
     }
 }
+
+
+const mapDispatchToProps = {
+    changeShowAddMovie: Actions.changeShowAddMovie,
+    fetchMovies: Actions.fetchMovies,
+};
 
 function mapStateToProps(state) {
     const some = Selectors.getSome(state);
@@ -45,4 +78,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(GetMovie);
+export default connect(mapStateToProps, mapDispatchToProps)(GetMovie);

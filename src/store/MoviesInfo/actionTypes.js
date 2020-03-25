@@ -1,6 +1,5 @@
 
 export const SOME = 'MoviesInfo.SOME';
-
 export const TOGGLE_MSG = 'TOGGLE_MSG';
 export const SOME_MOVIE = 'SOME_MOVIE';
 export const TOGGLE_IS_CHOSE_TIME = 'TOGGLE_ISC_HOSE_TIME';
@@ -12,3 +11,6 @@ export const EDITING_IMG = 'EDITING_IMG';
 export const EDITING_TIME = 'EDITING_TIME';
 export const ADD_MOVIE = 'ADD_MOVIE';
 export const CHANGE_DARK = 'CHANGE_DARK';
+export const CHANGE_TIME_ONE_MOVIE = 'CHANGE_TIME_ONE_MOVI';
+export const CHANGE_DATE = 'CHANGE_DATE';
+export const ADD_DAY = 'ADD_DAY';

@@ -5,29 +5,30 @@
     margin: 20px !important;
     margin-right: 30px !important;
 }
-.input-top-dark{
-    transition: width 1s, height 1s;
-    border: #aaaaaa solid 2px;
+.input-top-dark {
+    transition: width 0.4s, height 0.4s, background-color 0.1s ease;
     border-radius: 300px;
-    padding: 3px;
+    padding: 3px 20px;
+    background-color: #515151;
+    border: none;
 }
 
-.input-top-white{
-    padding: 5px;
-    transition: width 1s, height 1s;
-    border: #404040 solid 2px;
+.input-top-white {
+    transition: width 0.4s, height 0.4s;
     border-radius: 300px;
+    padding: 3px 20px;
 }
 
 .block{
     display: flex;
     flex-direction: row;
 }
-.search-up{
-    height: 10px;
-    width: 10px;
-}
-.search-down{
+.search-up {
     height: 30px;
-    width: 150px;
+    width: 100px
+}
+.search-down {
+    height: 30px;
+    width: 200px;
+    background-color: white;
 }

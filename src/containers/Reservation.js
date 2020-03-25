@@ -9,13 +9,13 @@ import {routerReducer} from 'react-router-redux';
 import './styleFiles/Reservation.css';
 
 class Reservation extends Component {
+
     state = {
         movieInfo: null
     };
 
     componentDidMount() {
         this.props.dispatch(Actions.changeMovie(this.props.match.params.topicId));
-
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
@@ -31,7 +31,6 @@ class Reservation extends Component {
         return (
             <div className='reservation'>
                 {(this.state.movieInfo) ?
-
                     <div className='reservation-img-background'>
                         <img className='reservation-img'
                              src={this.state.movieInfo.url}
@@ -59,7 +58,6 @@ class Reservation extends Component {
 
 function mapStateToProps(state) {
     return {
-        isChoseTime: Selectors.checkChoseTime(state),
         movieInfo: Selectors.getMovieInfo(state),
         routing: routerReducer,
         showMsg: state.movieInfo.showMsg,

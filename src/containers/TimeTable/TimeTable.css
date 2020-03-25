@@ -1,0 +1,236 @@
+.time-tables {
+    display: flex;
+    flex-wrap: wrap;
+    width: 95%;
+    align-self: center;
+    justify-content: center;
+}
+
+.timetable-row{
+    flex-direction: row;
+}
+
+.timetable-column{
+    flex-direction: column;
+}
+
+.select-date-scrolling{
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-self: center;
+}
+
+.select-date-main{
+    justify-content: space-between;
+    overflow:hidden;
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: row;
+    width: 95%;
+    padding: 10px;
+    border-radius: 10px;
+    align-self: center;
+}
+
+.select-date{
+    justify-content: space-between;
+    overflow:hidden;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    align-self: center;
+}
+
+.select-date-dark{
+    border: #23511d solid 3px;
+}
+
+.select-date-white{
+    border: #b08c8c solid 3px;
+}
+
+.date-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 6px;
+    border-radius: 8px;
+}
+
+.date-div-dark{
+    border:solid 2px #707068 ;
+}
+
+.date-div-white{
+    border:solid 2px #496d6b;
+}
+
+.date-div-dark-select{
+    border:solid 2px #596cce;
+}
+
+.date-div-white-select{
+    border:solid 2px #31d51c ;
+}
+
+.select-sessions{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    width: 100%;
+}
+
+.btn-time-table {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 250px;
+}
+
+.btn-time-table {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 250px;
+}
+
+.btn-time-table-1 {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.img-style-time-table {
+    max-width: 200px;
+    max-height: 200px;
+}
+
+.img-pos{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.one-movie-time-tables {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 15px;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.center{
+    align-self: center;
+}
+
+
+.margin-auto {
+    margin: auto;
+}
+
+.tile-list {
+    max-width: 200px;
+}
+
+.add-movie-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.add-movie-time-table{
+    justify-content: center;
+}
+
+.add-movie-time-table:hover{
+    border: #4a7044 solid 1px;
+}
+
+.add-movie-time-table:hover * {
+    color: #4a7044;
+}
+
+.add-movie-time-table:active {
+    border: #706c32 solid 1px;
+}
+
+.add-movie-time-table:active * {
+    color: #706c32;
+}
+
+.btn-delete-time{
+    border: solid black 2px;
+    border-radius: 3px;
+    background-color: #47b752;
+    color: #262626;
+    margin-left: 10px;
+    font-size: 11px;
+    align-self: center;
+    padding: 1px;
+    padding-top: 3px !important;
+}
+
+.btn-delete-time:hover{
+    border: solid #ffffff 2px;
+    background-color: #346801;
+    color: #ffffff;
+}
+
+.btn-delete-time:active{
+    border: solid #282828 2px;
+    background-color: #2fff3a;
+    color: #282828;
+}
+
+.btn-scroll{
+    align-self: center;
+    margin: 10px !important;
+}
+
+
+.btn-scroll-dark {
+    color: #aaaaaa;
+}
+
+.btn-scroll-dark:hover {
+
+    color: white;
+}
+
+.btn-scroll-dark:active {
+    color: #707068;
+}
+
+.btn-scroll-dark:hover i{
+    color:white ;
+}
+
+.btn-scroll-dark:active i{
+    color:#707068;
+}
+
+.btn-scroll-white {
+    color: #000000;
+}
+
+.btn-scroll-white:hover {
+    color: white;
+}
+
+.btn-scroll-white:active {
+    color: #707068;
+}
+
+
+
+
+

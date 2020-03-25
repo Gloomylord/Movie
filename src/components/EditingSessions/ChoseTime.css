@@ -10,25 +10,6 @@
     padding-right: 13px !important;
 }
 
-.btn-time-dark:hover {
-    border: #aaaaaa solid 2px;
-    background-color: #4f4c4e;
-    color: white;
-}
-
-.btn-time-dark:active {
-    border: #4f4c4e solid 2px;
-    color: #707068;
-}
-
-.btn-time-dark:hover i{
-    color:white ;
-}
-
-.btn-time-dark:active i{
-    color:#707068;
-}
-
 .btn-time-admin{
     margin: 5px;
     border: solid black 2px;
@@ -96,7 +77,6 @@
     color: #282828;
 }
 
-
 .div-between-input{
     align-self: center;
 }
@@ -123,25 +103,6 @@
     font-size: 15px;
     padding-left: 13px !important;
     padding-right: 13px !important;
-}
-
-.btn-time-white:hover {
-    border: #aaaaaa solid 2px;
-    background-color: #4f4c4e;
-    color: white;
-}
-
-.btn-time-white:active {
-    border: #4f4c4e solid 2px;
-    color: #707068;
-}
-
-.btn-time-white:hover i{
-    color:white ;
-}
-
-.btn-time-white:active i{
-    color:#707068;
 }
 
 .btn-time-dark-admin {
