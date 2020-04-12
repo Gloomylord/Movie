@@ -1,0 +1,98 @@
+.reservation {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 610px;
+    background-image: url('/img/kinozal.jpg');
+    -moz-background-size: 100%; /* Firefox 3.6+ */
+    -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
+    -o-background-size: 100%; /* Opera 9.6+ */
+    background-size: 100%;
+    border-radius: 20px;
+    padding-top: 136px;
+}
+
+.flex {
+    display: flex;
+}
+
+.reservation-img {
+    align-self: center;
+    max-height: 250px;
+    max-width: 500px;
+}
+
+.places {
+    flex-direction: row;
+    justify-content: center;
+}
+
+.div-place {
+    flex-grow: 0;
+}
+
+.rows {
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 45px;
+    align-self: center;
+    width: 80%;
+}
+
+.place-in-row {
+    flex-direction: row;
+    margin: auto;
+    justify-content: space-around;
+    flex-grow: 1;
+}
+
+.place-in-row > :first-child {
+    margin-bottom: 3px;
+}
+
+.place-in-row > :last-child {
+    margin-bottom: 3px;
+}
+
+.reservation-img-background {
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    background-color: #a2a657;
+    width: 30vh;
+    height: 281px;
+    min-height: 30vh;
+    min-width: 644px;
+    border-radius: 10px;
+    border: #2b2b2b solid 2px;
+}
+
+.center {
+    align-self: center;
+}
+
+.btn-place {
+    margin: 5px;
+    border: solid black 2px;
+    border-radius: 3px;
+    background-color: #4f4c4e;
+    color: #aaaaaa;
+    padding: 2px;
+    font-size: 13px;
+    padding-left: 13px !important;
+    padding-right: 13px !important;
+    align-self: center;
+}
+
+.btn-place:hover {
+    border: #aaaaaa solid 2px;
+    background-color: #4f4c4e;
+    color: white;
+}
+
+.btn-place:active {
+    border: #4f4c4e solid 2px;
+    color: #707068;
+}

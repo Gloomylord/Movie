@@ -1,0 +1,33 @@
+.search{
+    background: url('../../img/iconmonstr-magnifier-4-32.png');
+    height: 32px;
+    width: 32px;
+    margin: 20px !important;
+    margin-right: 30px !important;
+}
+.input-top-dark{
+    transition: width 1s, height 1s;
+    border: #aaaaaa solid 2px;
+    border-radius: 300px;
+    padding: 3px;
+}
+
+.input-top-white{
+    padding: 5px;
+    transition: width 1s, height 1s;
+    border: #404040 solid 2px;
+    border-radius: 300px;
+}
+
+.block{
+    display: flex;
+    flex-direction: row;
+}
+.search-up{
+    height: 10px;
+    width: 10px;
+}
+.search-down{
+    height: 30px;
+    width: 150px;
+}

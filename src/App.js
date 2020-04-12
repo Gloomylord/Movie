@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import TopMenu from './containers/TopMenu';
+import MainPart from "./containers/MainPart";
+import {ToastContainer, toast} from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+    showMessage = (str, className) => {
+        if(className) {
+            toast(str, {
+                className: className
+            });
+        } else {
+            toast.info(str);
+        }
+
+    };
+
+    render() {
+        return (
+            <div className="App">
+                <TopMenu/>
+                <MainPart showMessage={this.showMessage}/>
+                <ToastContainer position={toast.POSITION.BOTTOM_RIGHT}   />
+            </div>
+        );
+    }
 }
 
-export default App;
+function mapStateToProps(state) {
+    return {};
+}
+
+export default connect(mapStateToProps)(App);

@@ -1,0 +1,37 @@
+.movie-list-style {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.plus {
+    font-size: 100px !important;
+}
+
+.add-movie {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 15px;
+    border-radius: 8px;
+    border: #707068 solid 1px;
+    padding-right: 20px !important;
+    padding-left: 20px !important;
+}
+
+.add-movie:hover {
+    border: #4a7044 solid 1px;
+}
+
+.add-movie:hover * {
+    color: #4a7044;
+}
+
+.add-movie:active {
+    border: #706c32 solid 1px;
+}
+
+.add-movie:active * {
+    color: #706c32;
+}

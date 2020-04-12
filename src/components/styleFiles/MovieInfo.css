@@ -1,0 +1,90 @@
+.movie-img-style {
+    margin: 20px;
+}
+
+.img-style-info {
+    max-height: 600px;
+    max-width: 700px;
+    min-width: 300px;
+    min-height: 300px;
+    margin: 1px;
+}
+
+.movie-style {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.movie-name-dark{
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.movie-name-white{
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: #000000;
+}
+
+.some-info{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    min-width: 400px;
+}
+
+.border-for-dark{
+    border: #707068 solid 1px;
+}
+
+.border-for-white{
+    border: #04bfad solid 1px;
+}
+
+.change-description {
+    align-self: center;
+}
+
+.description-textarea{
+    text-align: justify;
+    font-size: 16px;
+    background-color: #aaaaaa;
+    border: #2b2b2b;
+    border-radius: 2px;
+    max-width: 588px;
+    height: 75px;
+    min-height: 30px;
+    max-height: 400px;
+    width: 588px;
+    margin: 5px;
+}
+
+.description {
+    text-align: justify;
+}
+
+.end {
+    margin-top: auto !important;
+    margin-bottom: 10px;
+}
+
+.end > :first-child {
+    margin-bottom: 15px;
+}
+
+.where-watch {
+    font-size: 20px;
+}
+
+.img-background {
+    padding: 5px;
+    background-color: #777;
+    box-shadow: 6px 6px 10px white;
+    border-radius: 5px;
+}

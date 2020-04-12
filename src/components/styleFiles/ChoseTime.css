@@ -1,0 +1,170 @@
+.btn-time-dark {
+    margin: 5px;
+    border: solid black 2px;
+    border-radius: 3px;
+    background-color: #4f4c4e;
+    color: #aaaaaa;
+    padding: 5px;
+    font-size: 15px;
+    padding-left: 13px !important;
+    padding-right: 13px !important;
+}
+
+.btn-time-dark:hover {
+    border: #aaaaaa solid 2px;
+    background-color: #4f4c4e;
+    color: white;
+}
+
+.btn-time-dark:active {
+    border: #4f4c4e solid 2px;
+    color: #707068;
+}
+
+.btn-time-dark:hover i{
+    color:white ;
+}
+
+.btn-time-dark:active i{
+    color:#707068;
+}
+
+.btn-time-admin{
+    margin: 5px;
+    border: solid black 2px;
+    border-radius: 3px;
+    background-color: #4f4c4e;
+    color: #aaaaaa;
+    padding: 5px;
+    font-size: 15px;
+    padding-left: 13px !important;
+    padding-right: 13px !important;
+}
+
+.time-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.time-add{
+    align-self: center;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    font-size: 15px;
+}
+
+.btn-time-add{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.time-input{
+    margin: 5px;
+    border: solid black 2px;
+    border-radius: 3px;
+    background-color: #47b752;
+    color: #262626;
+    width: 70px;
+    padding: 5px;
+    font-size: 14px;
+}
+
+.btn-change-some{
+    margin: 5px;
+    border: solid black 2px;
+    border-radius: 3px;
+    background-color: #47b752;
+    color: #262626;
+    padding: 5px;
+    padding-right: 13px !important;
+    padding-left: 13px !important ;
+    font-size: 14px;
+}
+
+.btn-change-some:hover{
+    border: solid #ffffff 2px;
+    background-color: #346801;
+    color: #ffffff;
+}
+
+.btn-change-some:active{
+    border: solid #282828 2px;
+    background-color: #2fff3a;
+    color: #282828;
+}
+
+
+.div-between-input{
+    align-self: center;
+}
+
+.check-mark{
+    font-size: 13px;
+}
+
+.div-change-time{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-left: 30px !important;
+}
+
+
+.btn-time-white {
+    margin: 5px;
+    border: solid #636363 2px;
+    border-radius: 3px;
+    background-color: #e6e6e6;
+    color: #000000;
+    padding: 5px;
+    font-size: 15px;
+    padding-left: 13px !important;
+    padding-right: 13px !important;
+}
+
+.btn-time-white:hover {
+    border: #aaaaaa solid 2px;
+    background-color: #4f4c4e;
+    color: white;
+}
+
+.btn-time-white:active {
+    border: #4f4c4e solid 2px;
+    color: #707068;
+}
+
+.btn-time-white:hover i{
+    color:white ;
+}
+
+.btn-time-white:active i{
+    color:#707068;
+}
+
+.btn-time-dark-admin {
+    margin: 5px;
+    border: solid black 2px;
+    border-radius: 3px;
+    background-color: #4f4c4e;
+    color: #aaaaaa;
+    padding: 5px;
+    font-size: 15px;
+    padding-left: 13px !important;
+    padding-right: 13px !important;
+}
+
+.btn-time-white-admin {
+    margin: 5px;
+    border: solid #636363 2px;
+    border-radius: 3px;
+    background-color: #e6e6e6;
+    color: #000000;
+    padding: 5px;
+    font-size: 15px;
+    padding-left: 13px !important;
+    padding-right: 13px !important;
+}
+

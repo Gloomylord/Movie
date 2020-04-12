@@ -1,0 +1,99 @@
+.new-movie{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px;
+    width: 45%;
+    align-self: center;
+}
+
+.x-mark-circle-o{
+    align-self: end;
+}
+
+.add-movie-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 20px ;
+}
+
+.date{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.date-times{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    flex-wrap: wrap;
+}
+
+.date-time{
+    display: flex;
+    flex-direction: column;
+}
+
+.pad{
+    padding: 5px;
+    font-size: 15px;
+}
+
+.input-name{
+    font-size: 20px;
+    align-self: center;
+}
+
+.add-movie-input{
+    margin-top: 10px !important;
+    border: solid black 2px;
+    border-radius: 3px;
+    background-color: #47b752;
+    color: #262626;
+    padding: 8px;
+    font-size: 16px;
+}
+
+.time-div-main{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.data-time{
+    margin-top: 20px !important;
+}
+
+.div-add-time{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.none-margin{
+    margin-bottom: 0 !important;
+    margin-top: 10px !important;
+}
+
+.time-pos{
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+.text-color-time{
+    font-size: 22px;
+}
+
+.mt-20{
+    margin-top: 20px;
+}
+
+.select{
+    background-color: #47b752;
+    display: flex;
+    flex-direction: row;
+    border: solid black 2px;
+    border-radius: 6px;
+}
