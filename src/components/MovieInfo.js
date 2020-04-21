@@ -27,8 +27,8 @@ class MovieInfo extends Component {
             this.setState({
                 description: this.refTextArea.current.value
             });
-            console.log('start');
             try {
+                document.body.style.cursor = 'progress';
                 let response = await fetch('/api/description', {
                     method: 'POST',
                     headers: {
@@ -40,7 +40,7 @@ class MovieInfo extends Component {
                     })
                 });
                 let resalt = await response.json();
-                console.log(resalt);
+                document.body.style.cursor = 'default';
             } catch (e) {
                 console.log('error: ', e);
             }
@@ -49,6 +49,7 @@ class MovieInfo extends Component {
 
     async componentDidMount() {
         try {
+            document.body.style.cursor = 'progress';
             let response = await fetch('/api/movies', {
                 method: 'POST',
                 headers: {
@@ -57,12 +58,12 @@ class MovieInfo extends Component {
                 body: JSON.stringify({id: this.props.match.params.topicId})
             });
             let start = await response.json();
+            document.body.style.cursor = 'default';
             if (start.movie[0]) {
                 this.setState({
                     movieInfo: start.movie[0]
                 })
             }
-            console.log('fetch...');
             this.props.dispatch(Actions.fetchSessions(this.props.match.params.topicId));
         } catch (e) {
             console.log(e);
@@ -72,9 +73,9 @@ class MovieInfo extends Component {
     formElem = async (e) => {
         e.preventDefault();
         if (this.props.editingImg) {
+            document.body.style.cursor = 'progress';
             let body = new FormData(document.getElementById('formElem'));
             body.append('id', this.props.match.params.topicId);
-            console.log('id', this.props.match.params.topicId);
             let response = await fetch('/api/changeimg', {
                 method: 'POST',
                 body: body
@@ -92,12 +93,12 @@ class MovieInfo extends Component {
                             body: JSON.stringify({id: this.props.match.params.topicId})
                         });
                         let start = await response.json();
+                        document.body.style.cursor = 'default';
                         if (start.movie[0]) {
                             this.setState({
                                 movieInfo: start.movie[0]
                             })
                         }
-                        console.log('fetch...');
                         this.props.dispatch(Actions.changeEditingImg());
                     } catch (e) {
                         console.log(e);

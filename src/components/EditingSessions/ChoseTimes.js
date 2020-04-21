@@ -21,7 +21,7 @@ class ChoseTimes extends Component {
     };
 
     deleteTime = async () => {
-        console.log('id: ', this.state.id, 'time: ', this.state.time, "date: ", this.state.date);
+        document.body.style.cursor = 'progress';
         let response = await fetch('/api/deletetime', {
             method: 'POST',
             headers: {
@@ -34,14 +34,13 @@ class ChoseTimes extends Component {
             })
         });
         let resalt = await response.json();
-        console.log(resalt);
+        document.body.style.cursor = 'default';
         this.props.dispatch(Actions.deleteDateTimeOneMovie(this.state.time, this.state.date))
     };
 
     addTime = async () => {
         let {time} = this.state;
         if (time) {
-            console.log('time: ', time);
             let start = true;
             this.props.times.forEach((value) => {
                 if (value.date === this.state.date && this.state.time === value.time + ':00') {
@@ -50,7 +49,7 @@ class ChoseTimes extends Component {
             });
             if (start) {
                 this.props.dispatch(Actions.addDateTimeOneMovie(time + ':00', this.state.date));
-                console.log(time, this.state.date);
+                document.body.style.cursor = 'progress';
                 let response = await fetch('/api/datetime', {
                     method: 'POST',
                     headers: {
@@ -64,7 +63,7 @@ class ChoseTimes extends Component {
                 });
                 this.setState({time: '00:00'});
                 let resalt = await response.json();
-                console.log(resalt);
+                document.body.style.cursor = 'default';
                 this.props.dispatch(Actions.fetchSessions(this.state.id));
             } else {
                 this.props.showMessage('Такое время уже есть');

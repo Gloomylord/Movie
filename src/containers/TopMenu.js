@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as Selectors from '../store/MoviesInfo/reducer';
 import * as Actions from "../store/MoviesInfo/actions";
-import Search from "../components/Search";
 import cn from 'classnames';
 import './styleFiles/TopMenu.css';
 import {NavLink} from "react-router-dom";

@@ -32,7 +32,6 @@ class AddMovie extends Component {
         } else {
             this.props.showMessage('Такая дата уже добавлена');
         }
-        console.log('timetable', this.state.timetable);
     };
 
     deleteDate = (date) => {
@@ -63,7 +62,6 @@ class AddMovie extends Component {
     };
 
     deleteTime = (time, date) => {
-        console.log(this.state.timetable);
         let newTimetable = this.state.timetable.map((value) => {
             if (value.date === date) {
                 let a = [];
@@ -90,14 +88,14 @@ class AddMovie extends Component {
         e.preventDefault();
         let body = new FormData();
         body.append('timetable', JSON.stringify(this.state.timetable));
-        console.log(body.get('timetable'));
-        console.log('timetable fetch:', this.state.timetable);
+        document.body.style.cursor = 'progress';
         let response = await fetch('/api/addmovie', {
             method: 'POST',
             body: body
         });
         try {
             let result = await response.json();
+            document.body.style.cursor = 'progress';
             if (result.message === "Файл загружен") {
                 this.props.showMessage('Добавлено');
             } else {

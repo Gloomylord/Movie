@@ -11,7 +11,6 @@ import cn from "classnames";
 class GetMovie extends Component {
 
     addMovie = () => {
-        console.log('addMovie');
         this.props.changeShowAddMovie();
         // this.props.dispatch(Actions.changeShowAddMovie());
     };

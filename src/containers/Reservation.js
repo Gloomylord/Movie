@@ -27,7 +27,6 @@ class Reservation extends Component {
     }
 
     render() {
-        console.log(`it's me`, this.state.movieInfo);
         return (
             <div className='reservation'>
                 {(this.state.movieInfo) ?

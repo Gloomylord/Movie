@@ -12,7 +12,6 @@ import DateButton from "./DateButton";
 class SelectDate extends Component {
 
     addMovie = () => {
-        console.log('addMovie');
         this.props.dispatch(Actions.changeShowAddMovie());
     };
 
@@ -53,7 +52,6 @@ class SelectDate extends Component {
     };
 
     addDay = () => {
-        console.log(this.props.addDay);
         this.props.dispatch(Actions.addDayPlus());
     };
 

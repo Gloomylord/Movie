@@ -35,7 +35,6 @@ class TimeTable extends Component {
             corDay = date.getDate();
         }
         date = date.getFullYear() + '-' + corMonth + '-' + corDay;
-        console.log('date',date);
         this.props.dispatch(Actions.fetchMovies());
         this.props.dispatch(Actions.fetchAllSessions());
         this.props.dispatch(Actions.changeDate(date));
@@ -44,14 +43,12 @@ class TimeTable extends Component {
     selectMovie = () => {
         let movieId = new Set();
         let movies = [];
-        console.log('movies: ' ,this.props.movies,'date:',this.props.selectDate,'time',this.props.dateTimes);
         if (!(this.props.movies === null) && !(this.props.selectDate === null) && !(this.props.dateTimes === null)) {
             this.props.dateTimes.forEach(value => {
                 if (this.props.selectDate === value.date) {
                     movieId.add(value.movieId);
                 }
             });
-            console.log('here');
             movieId.forEach(value => {
                 this.props.movies.forEach(movie => {
                     if (movie.id === value) {
@@ -66,6 +63,7 @@ class TimeTable extends Component {
     };
 
     render() {
+
         let movies = this.selectMovie();
         return (
             <div className='select-sessions'>

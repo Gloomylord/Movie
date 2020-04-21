@@ -7,8 +7,9 @@ export function changeSome() {
 
 export function fetchMovies() {
     return async (dispatch) => {
-        let movies;
+        let movies = null;
         try {
+            document.body.style.cursor = 'progress';
             let response = await fetch('/api/movies', {
                 method: 'POST',
                 headers: {
@@ -17,6 +18,7 @@ export function fetchMovies() {
                 body: JSON.stringify({list: 'get All'})
             });
             let start = await response.json();
+            document.body.style.cursor = 'default';
             if (start.movies) {
                 movies = start.movies;
             }
@@ -29,8 +31,9 @@ export function fetchMovies() {
 
 export function fetchSessions(id) {
     return async (dispatch) => {
-        let timesForOneMovie;
+        let timesForOneMovie = null;
         try {
+            document.body.style.cursor = 'progress';
             let response = await fetch('/api/sessions', {
                 method: 'POST',
                 headers: {
@@ -39,6 +42,7 @@ export function fetchSessions(id) {
                 body: JSON.stringify({id: id})
             });
             let res = await response.json();
+            document.body.style.cursor = 'default';
             if (res.sessions) {
                 timesForOneMovie = res.sessions;
             }
@@ -51,8 +55,9 @@ export function fetchSessions(id) {
 
 export function fetchAllSessions() {
     return async (dispatch) => {
-        let times;
+        let times = null;
         try {
+            document.body.style.cursor = 'progress';
             let response = await fetch('/api/allsessions', {
                 method: 'POST',
                 headers: {
@@ -61,13 +66,15 @@ export function fetchAllSessions() {
                 body: JSON.stringify({message: 'top'})
             });
             let res = await response.json();
+            document.body.style.cursor = 'default';
             if (res.sessions) {
                 times = res.sessions;
+                dispatch({type: types.CHANGE_TIME, times});
             }
         } catch (e) {
             console.log('error: ', e);
         }
-        dispatch({type: types.CHANGE_TIME, times});
+
     };
 }
 
@@ -76,7 +83,6 @@ export function changeEditingDescription() {
 }
 
 export function changeDate(selectDate) {
-    console.log('date', selectDate);
     return ({type: types.CHANGE_DATE, selectDate});
 }
 
@@ -112,6 +118,7 @@ export function changeMovie(id) {
     return async (dispatch) => {
         let someMovie;
         try {
+            document.body.style.cursor = 'progress';
             let response = await fetch('/api/movies', {
                 method: 'POST',
                 headers: {
@@ -120,6 +127,7 @@ export function changeMovie(id) {
                 body: JSON.stringify({id: id})
             });
             let res = await response.json();
+            document.body.style.cursor = 'default';
             if (res.movie[0]) {
                 someMovie = res.movie[0];
             } else {
@@ -134,7 +142,6 @@ export function changeMovie(id) {
 
 export function addDateTimeOneMovie(time, date) {
     return (dispatch, getState) => {
-        console.log('time: ', time, 'date: ', date);
         let timesForOneMovie, start = true;
         let newTimes = movieInfoSelectors.getTimesOneMovie(getState());
         if (newTimes) {

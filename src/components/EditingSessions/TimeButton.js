@@ -15,7 +15,7 @@ class TimeButton extends Component {
     };
 
     deleteTime = async () => {
-        console.log('id: ', this.state.id, 'time: ', this.state.time, "date: ", this.state.date);
+        document.body.style.cursor = 'progress';
         let response = await fetch('/api/deletetime', {
             method: 'POST',
             headers: {
@@ -28,7 +28,7 @@ class TimeButton extends Component {
             })
         });
         let resalt = await response.json();
-        console.log(resalt);
+        document.body.style.cursor = 'default';
         this.props.dispatch(Actions.deleteDateTimeOneMovie(this.state.time, this.state.date))
     };
 
